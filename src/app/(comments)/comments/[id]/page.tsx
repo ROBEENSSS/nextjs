@@ -9,8 +9,8 @@ const CommentPage = async ({params}: Params) => {
     const comment = await commentsService.getCommentsById(params.id)
     return (
         <div>
-            <ul>
-                <li key={comment?.id}>
+            <ul key={comment?.id}>
+                <li>
                     {comment?.id} {comment?.body}
                 </li>
             </ul>
