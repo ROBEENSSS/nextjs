@@ -1,17 +1,25 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {usersService} from "@/services/api.service";
 
-type Params = {
-    params: { id: string }
-};
+type Params = Promise<{ id: string }>
+type SearchParams = Promise <{[key: string]: string | string[] | undefined}>
 
-const UserPage = async ({params}: Params) => {
-    const user = await usersService.getUserById(params.id);
+type MyProps = {
+    params: Params;
+    searchParams: SearchParams;
+}
+
+
+const UserPage: FC<MyProps> = async ({params, searchParams}) => {
+    const {id} = await params;
+    const {shlapa} = await searchParams;
+    const user = await usersService.getUserById(id);
     return (
         <div>
             <ul>
                 <li>
                     {user?.id} : {user?.name}
+                    <hr/> {shlapa}
                 </li>
             </ul>
         </div>

@@ -9,7 +9,12 @@ interface IProps {
 const UserComponent:FC<IProps> = ({user}) => {
     return (
         <div>
-            <Link href={`/users/${user.id}`}>{user.id} : {user.name}</Link>
+            <Link href={
+                {
+                    pathname: `/users/${user.id}`,
+                    query: {shlapa: JSON.stringify(user)}
+                }
+            }>{user.id} : {user.name}</Link>
         </div>
     );
 };
